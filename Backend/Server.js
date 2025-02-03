@@ -1,0 +1,17 @@
+const express=require('express')
+const mongoose=require('mongoose')
+const bodyparser=require('body-parser')
+const VendorRoutes=require('./routes/Vendorroute')
+const firmRoutes=require('./routes/firmRoute')
+const productRoutes=require('./routes/productroute')
+const port=5001
+const app=express()
+mongoose.connect('mongodb://127.0.0.1:27017/College').then(()=>{console.log("connected to database")})
+.catch((err)=>{console.log(err)})
+app.use(bodyparser.json())
+app.use('/vendor',VendorRoutes)
+app.use('/firm',firmRoutes)
+app.use('/product',productRoutes)
+app.listen(port,()=>{
+    console.log(`Server is running at ${port} port ` )
+})
